@@ -1,0 +1,31 @@
+plugins {
+    id "java"
+    id "application"
+    id "idea"  // I use IntelliJ IDEA
+    id "jacoco" // for code coverage reports
+}
+
+
+mainClassName = 'com.github.wakingrufus.microblog.Main'
+group = 'com.github.wakingrufus' // your group name
+version = '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-log4j12:1.7.+' // for logging
+    compile 'org.projectlombok:lombok:1.+'  // utilities for POJOs
+    testCompile 'junit:junit:4.+' // unit testing framework
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-parameters'
+}
